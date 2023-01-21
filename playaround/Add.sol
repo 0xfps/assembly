@@ -56,4 +56,38 @@ contract W {
             return(0x90, 0x20)
         }
     }
+
+    // Assembly conditionals has no opening '()'s.
+    function ifelse(uint8 n) public pure returns (bool t) {
+        assembly {
+            if gt(n, 1) {
+                t := 1
+            }
+            // No else.
+        }
+    }
+
+    function checkValue() public payable {
+        uint256 price = 3 ether;
+
+        assembly {
+            if lt(callvalue(), price) {
+                revert(0xff, 0x20)
+            }
+        }
+    }
+
+    function switchIf() public {
+        assembly {
+            let x := 0
+            switch calldataload(4)
+            case 0 {
+                x := calldataload(0x24)
+            }
+            default {
+                x := calldataload(0x44)
+            }
+            sstore(0, div(x, 2))
+        }
+    }
 }
