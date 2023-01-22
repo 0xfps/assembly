@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.14;
 
+////////////////////////////////////////////////////////////////////////////////////
+//                   mstore(0x80, add(mload(0x80), 3))                            //
+// Personal tip, Assembly is read from the inside bracket to the outside bracket. //
+////////////////////////////////////////////////////////////////////////////////////
+
 contract W {
     function add(uint256 x, uint256 y) public pure returns (uint256) {
         assembly {
