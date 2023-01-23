@@ -45,7 +45,7 @@ contract Arr {
         bytes32 loc = keccak256(abi.encode(_ind, slot));
 
         assembly {
-            // Location is at keccak256(arr.slot) + (index)
+            // Location is at keccak256(mappingKey, mappingSlot)
             val := sload(loc)
         }
     }
