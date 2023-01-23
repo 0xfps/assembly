@@ -31,15 +31,15 @@ contract MultiSave {
     uint16 C = 2;
     uint8 D = 8;
 
-    function get() public view returns (uint8 d) {
+    function get() public view returns (bytes32 d) {
         assembly {
             // Get the value in the entire slot.
-            let DD := sload(D.slot)
-
-            // Make a right shift.
-            let shifted := shr(mul(D.offset, 0x08), DD)
-
-            d := and(0xffffffff, shifted)
+            let DD := sload(D.slot) // 0
+            // 0x0008000200000000000000000000000300000000000000000000000000000004
+            let c := shl(0x10, DD)
+            // 0x0002000000000000000000000003000000000000000000000000000000040000
+            d := shr(mul(30, 8), c)
+            // Returns the value of C.
         }
     }
 
