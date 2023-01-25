@@ -38,6 +38,7 @@ contract Caller {
             mstore(mptr, 0x0194db8e)
 
             // The calldata starts here.
+            // Introducing an indefinite array will make the calldata go ahead of the by 32 bytes. This is due to the space for the array pointer to be stored.
             // The memory locations are 20 bytes ahead of the calldata.
             mstore(add(mptr, 0x20), 0x20) // 0x00 in calldata, the array pointer points to 0x20 in calldata, which is 0x40 in memory.
             mstore(add(mptr, 0x40), 2) // 0x20 in calldata.
