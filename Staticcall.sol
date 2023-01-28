@@ -34,8 +34,10 @@ contract Caller {
             // Load selector to memory.
             let mptr := mload(0x40)
             let oldMptr := mptr
-
+            
+            // The calldata doesn't include this 👇🏾.
             mstore(mptr, 0x0194db8e)
+            // The calldata doesn't include this 👆🏾.
 
             // The calldata starts here.
             // The memory locations are 20 bytes ahead of the calldata because of the stored function selector in 0x00 - 0x1f of memory.
